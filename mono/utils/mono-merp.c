@@ -272,21 +272,27 @@ get_merp_exctype (MERPExcType exc)
 static MERPExcType
 parse_exception_type (const char *signal)
 {
-	if (!strcmp (signal, "SIGSEGV"))
+	if (!strcmp (signal, "segv"))
 		return MERP_EXC_SIGSEGV;
 
-	if (!strcmp (signal, "SIGFPE"))
+	if (!strcmp (signal, "fpe"))
 		return MERP_EXC_SIGFPE;
 
-	if (!strcmp (signal, "SIGILL"))
+	if (!strcmp (signal, "ill"))
 		return MERP_EXC_SIGILL;
 
-	if (!strcmp (signal, "SIGABRT"))
+	if (!strcmp (signal, "abrt"))
 		return MERP_EXC_SIGABRT;
+
+	if (!strcmp (signal, "trap"))
+		return MERP_EXC_SIGTRAP;
+
+	if (!strcmp (signal, "sys"))
+		return MERP_EXC_SIGSYS;
 
 	// Force quit == hang?
 	// We need a default for this
-	if (!strcmp (signal, "SIGTERM"))
+	if (!strcmp (signal, "term"))
 		return MERP_EXC_HANG;
 
 	// FIXME: There are no other such signal
